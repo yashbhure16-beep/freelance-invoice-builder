@@ -1,0 +1,705 @@
+/* ===================================================
+   FREELANCE INVOICE BUILDER — Premium Style Sheet
+   Ultra-Modern SaaS Dashboard · Glassmorphism · Polished
+   =================================================== */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  --clr-primary: #4f46e5;
+  --clr-primary-hover: #4338ca;
+  --clr-primary-light: #e0e7ff;
+  --clr-primary-ghost: rgba(79, 70, 229, 0.08);
+  --clr-danger: #ef4444;
+  --clr-danger-hover: #dc2626;
+  --clr-danger-ghost: rgba(239, 68, 68, 0.1);
+  --clr-success: #10b981;
+  
+  --clr-bg-gradient: linear-gradient(135deg, #eef2ff 0%, #f8fafc 50%, #e0e7ff 100%);
+  --clr-surface: rgba(255, 255, 255, 0.85); 
+  --clr-surface-solid: #ffffff;
+  --clr-border: rgba(226, 232, 240, 0.8);
+  --clr-border-light: #f1f5f9;
+  
+  --clr-text: #0f172a;
+  --clr-text-secondary: #475569;
+  --clr-text-muted: #94a3b8;
+  
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 10px 25px -5px rgba(79, 70, 229, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 20px rgba(79, 70, 229, 0.3);
+  
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 200ms var(--ease-out);
+  --transition-base: 400ms var(--ease-out);
+}
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  /* Forces the vertical scrollbar to always show, preventing layout shifts on refresh */
+  overflow-y: scroll; 
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--clr-bg-gradient);
+  color: var(--clr-text);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--clr-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--clr-primary-hover);
+}
+
+/* ---------- Container ---------- */
+.container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ============================ HEADER ============================ */
+.site-header {
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.logo-icon {
+  color: var(--clr-primary);
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(79, 70, 229, 0.4));
+}
+
+.logo-text {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--clr-text);
+  background: linear-gradient(to right, #0f172a, #4338ca);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--clr-primary);
+  background: var(--clr-primary-light);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(79, 70, 229, 0.2);
+}
+
+/* ============================ MAIN CONTENT ============================ */
+.main-content {
+  flex: 1;
+  padding: var(--space-2xl) 0;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--clr-text);
+}
+
+.section-subtitle {
+  font-size: 0.9rem;
+  color: var(--clr-text-secondary);
+  margin-top: 4px;
+}
+
+/* ============================ SHARED CARD STYLES ============================ */
+.dashboard,
+.billing-section,
+.summary-section {
+  background: var(--clr-surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-xl);
+}
+
+.dashboard {
+  animation: fadeUp 0.6s var(--ease-out) both;
+}
+
+.billing-section {
+  animation: fadeUp 0.6s 0.1s var(--ease-out) both;
+}
+
+.summary-section {
+  animation: fadeUp 0.6s 0.2s var(--ease-out) both;
+}
+
+/* ============================ DASHBOARD — Client Form ============================ */
+.invoice-form {
+  margin-top: var(--space-lg);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--clr-text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.form-input {
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--clr-text);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  transition: all var(--transition-fast);
+  outline: none;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.form-input::placeholder {
+  color: var(--clr-text-muted);
+  font-weight: 400;
+}
+
+.form-input:hover {
+  border-color: #cbd5e1;
+}
+
+.form-input:focus {
+  border-color: var(--clr-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px var(--clr-primary-light), inset 0 2px 4px rgba(0, 0, 0, 0.01);
+}
+
+/* AUTO-EXPAND TEXTAREA STYLE */
+textarea.form-input.auto-expand {
+  resize: none;
+  overflow: hidden;
+  min-height: 46px;
+  display: block;
+  width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ============================ BILLING TABLE ============================ */
+.billing-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md);
+  background: var(--clr-surface-solid);
+  border: 1px solid var(--clr-border-light);
+  box-shadow: var(--shadow-xs);
+}
+
+.billing-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.billing-table thead {
+  background: #f8fafc;
+  border-bottom: 2px solid var(--clr-border-light);
+}
+
+.billing-table th {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--clr-text-secondary);
+  padding: 16px;
+  text-align: left;
+}
+
+.th-qty,
+.th-price,
+.th-total {
+  text-align: right;
+  width: 140px;
+}
+
+.th-action {
+  width: 60px;
+  text-align: center;
+}
+
+.billing-table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--clr-border-light);
+}
+
+.billing-row {
+  transition: background var(--transition-fast);
+}
+
+.billing-row:hover {
+  background: #fdfeff;
+}
+
+.billing-table .item-name {
+  width: 100%;
+}
+
+.billing-table .item-qty,
+.billing-table .item-price {
+  width: 100%;
+  text-align: right;
+}
+
+.billing-table .row-total {
+  display: block;
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--clr-text);
+  font-size: 1rem;
+}
+
+.btn-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--clr-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-remove:hover {
+  background: var(--clr-danger-ghost);
+  color: var(--clr-danger);
+  transform: scale(1.1);
+}
+
+.billing-row.row-enter {
+  animation: rowSlideIn 0.4s var(--ease-out) both;
+}
+
+/* ============================ BUTTONS ============================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-add {
+  background: var(--clr-primary-light);
+  color: var(--clr-primary-hover);
+}
+
+.btn-add:hover {
+  background: var(--clr-primary);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+}
+
+.btn-download {
+  background: linear-gradient(135deg, var(--clr-primary), #6366f1);
+  color: #fff;
+  font-size: 1.05rem;
+  padding: 16px 40px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+}
+
+.btn-download:hover {
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+.btn-footer {
+  padding: 12px 28px;
+  font-size: 0.9rem;
+  color: #fff;
+  background: #0f172a;
+  border-radius: 999px;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
+}
+
+.btn-footer:hover {
+  background: #1e293b;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.3);
+}
+
+/* ============================ SUMMARY SECTION ============================ */
+.summary-card {
+  max-width: 420px;
+  margin-left: auto;
+  margin-top: var(--space-lg);
+  background: var(--clr-surface-solid);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--clr-border-light);
+  box-shadow: var(--shadow-xs);
+}
+
+.summary-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+}
+
+.summary-label {
+  font-size: 0.95rem;
+  color: var(--clr-text-secondary);
+  font-weight: 600;
+}
+
+.summary-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--clr-text);
+}
+
+.summary-row--tax {
+  gap: var(--space-md);
+}
+
+.tax-input-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--clr-bg-gradient);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--clr-border);
+}
+
+.tax-input {
+  width: 60px;
+  text-align: right;
+  padding: 4px 0;
+  font-size: 1rem;
+  font-weight: 700;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--clr-primary);
+}
+
+.tax-symbol {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--clr-primary);
+}
+
+.summary-divider {
+  height: 2px;
+  background: var(--clr-border-light);
+  margin: var(--space-md) 0;
+}
+
+.summary-row--grand .summary-label {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--clr-text);
+}
+
+.grand-total {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--clr-primary);
+  letter-spacing: -0.02em;
+}
+
+/* ============================ DOWNLOAD SECTION ============================ */
+.download-section {
+  text-align: center;
+  padding: var(--space-lg) 0 var(--space-2xl);
+  animation: fadeUp 0.6s 0.3s var(--ease-out) both;
+}
+
+/* ============================ FOOTER ============================ */
+.site-footer {
+  background: #ffffff;
+  border-top: 1px solid var(--clr-border);
+  padding: var(--space-xl) 0;
+  margin-top: auto;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+}
+
+.footer-credit {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-name {
+  font-size: 0.95rem;
+  color: var(--clr-text-secondary);
+}
+
+.footer-name strong {
+  color: var(--clr-text);
+  font-weight: 800;
+}
+
+.footer-email a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--clr-text-muted);
+}
+
+.footer-email a:hover {
+  color: var(--clr-primary);
+}
+
+/* ============================ PDF-SPECIFIC HELPERS (CLEAN FIX) ============================ */
+/* This section structures the document specifically for PDF generation */
+body.pdf-mode {
+  background: #ffffff !important;
+  min-height: auto !important;
+  height: auto !important;
+}
+
+body.pdf-mode .btn-remove,
+body.pdf-mode .btn-add,
+body.pdf-mode .btn-download,
+body.pdf-mode .download-section,
+body.pdf-mode .site-header,
+body.pdf-mode .site-footer {
+  display: none !important;
+}
+
+body.pdf-mode .billing-table .th-action,
+body.pdf-mode .billing-table td:last-child {
+  display: none !important;
+}
+
+body.pdf-mode .main-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body.pdf-mode .container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body.pdf-mode .table-wrapper {
+  overflow: visible !important;
+  border: none !important;
+}
+
+body.pdf-mode .billing-table {
+  min-width: 100% !important;
+  width: 100% !important;
+}
+
+body.pdf-mode .dashboard,
+body.pdf-mode .billing-section,
+body.pdf-mode .summary-section {
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 10px 0 !important;
+  margin-bottom: 20px !important;
+  animation: none !important;
+  background: transparent !important;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+body.pdf-mode .summary-card {
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* ============================ ANIMATIONS & RESPONSIVE ============================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rowSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .full-width {
+    grid-column: auto;
+  }
+  
+  .billing-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .btn-add {
+    width: 100%;
+  }
+  
+  .summary-card {
+    max-width: 100%;
+  }
+  
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard,
+  .billing-section,
+  .summary-section {
+    padding: var(--space-md);
+  }
+}
+
+/* HIDE NUMBER INPUT ARROWS */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Freelance Invoice & Quotation Builder — Create, customize, and download professional PDF invoices in seconds.">
+  <title>Freelance Invoice Builder</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+        <h1 class="logo-text">Freelance Invoice Builder</h1>
+      </div>
+      <nav class="header-actions" aria-label="Primary actions">
+        <span class="badge">Pro</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+
+      <section class="dashboard" aria-labelledby="dashboard-heading">
+        <h2 id="dashboard-heading" class="section-title">Invoice Details</h2>
+        <p class="section-subtitle">Fill in the client and project information below to get started.</p>
+
+        <form id="invoice-form" class="invoice-form" autocomplete="off">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="client-name" class="form-label">Client Name</label>
+              <input type="text" id="client-name" class="form-input" placeholder="e.g. Acme Corporation" required>
+            </div>
+
+            <div class="form-group">
+              <label for="invoice-date" class="form-label">Date</label>
+              <input type="date" id="invoice-date" class="form-input" required>
+            </div>
+
+            <div class="form-group full-width">
+              <label for="project-description" class="form-label">Project Description</label>
+              <textarea id="project-description" class="form-input auto-expand" placeholder="e.g. Website Redesign & Development" rows="1" required></textarea>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <section class="billing-section" aria-labelledby="billing-heading">
+        <div class="billing-header">
+          <div>
+            <h2 id="billing-heading" class="section-title">Itemized Billing</h2>
+            <p class="section-subtitle">Add each service or product as a line item.</p>
+          </div>
+          <button type="button" id="add-item-btn" class="btn btn-add">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"/>
+              <line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Add New Item
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="billing-table" id="billing-table">
+            <thead>
+              <tr>
+                <th class="th-item">Item Name</th>
+                <th class="th-qty">Quantity</th>
+                <th class="th-price">Price (₹)</th>
+                <th class="th-total">Total (₹)</th>
+                <th class="th-action" aria-label="Actions"></th>
+              </tr>
+            </thead>
+            <tbody id="billing-tbody">
+              <tr class="billing-row">
+                <td>
+                  <textarea class="form-input item-name auto-expand" placeholder="Service or product name" aria-label="Item Name" rows="1"></textarea>
+                </td>
+                <td>
+                  <input type="number" class="form-input item-qty" min="1" value="1" aria-label="Quantity">
+                </td>
+                <td>
+                  <input type="number" class="form-input item-price" min="0" step="0.01" value="0.00" aria-label="Price">
+                </td>
+                <td>
+                  <span class="row-total">0.00</span>
+                </td>
+                <td>
+                  <button type="button" class="btn-remove" aria-label="Remove item" title="Remove item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="3 6 5 6 21 6"/>
+                      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+                      <path d="M10 11v6"/>
+                      <path d="M14 11v6"/>
+                      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+                    </svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="summary-section" aria-labelledby="summary-heading">
+        <h2 id="summary-heading" class="section-title">Invoice Summary</h2>
+
+        <div class="summary-card">
+          <div class="summary-row">
+            <span class="summary-label">Subtotal</span>
+            <span class="summary-value" id="subtotal">₹0.00</span>
+          </div>
+
+          <div class="summary-row summary-row--tax">
+            <label for="tax-rate" class="summary-label">Tax Rate</label>
+            <div class="tax-input-group">
+              <input type="number" id="tax-rate" class="form-input tax-input" min="0" max="100" step="0.5" value="0" aria-label="Tax percentage">
+              <span class="tax-symbol">%</span>
+            </div>
+          </div>
+
+          <div class="summary-row summary-row--tax-amount">
+            <span class="summary-label">Tax Amount</span>
+            <span class="summary-value" id="tax-amount">₹0.00</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row summary-row--grand">
+            <span class="summary-label">Grand Total</span>
+            <span class="summary-value grand-total" id="grand-total">₹0.00</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="download-section">
+        <button type="button" id="download-pdf-btn" class="btn btn-download">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download PDF Invoice
+        </button>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-credit">
+        <p class="footer-name">Crafted by <strong>Yash Bhure</strong></p>
+        <p class="footer-email">
+          <a href="mailto:yashbhure16@gmail.com">yashbhure16@gmail.com</a>
+        </p>
+      </div>
+      <div class="footer-cta">
+        <a href="https://digitalheroesco.com" class="btn btn-footer" target="_blank" rel="noopener noreferrer">
+          Built for Digital Heroes
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
